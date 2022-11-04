@@ -13,7 +13,7 @@ public class ComputerDatabaseSimulation extends Simulation {
                     .get("/api/1/rest/asset/list/Automation1/_rbin?asset_type=Pipeline&limit=25&offset=0&sort=metadata.d_time:-1&search=")
                         .basicAuth("rozer@snaplogic.com", "CanarySnap16048.")
                         .check(status().is(200))
-            );
+    );
 
     ChainBuilder account =
             exec(
@@ -21,7 +21,7 @@ public class ComputerDatabaseSimulation extends Simulation {
                             .get("/api/1/rest/asset/list/Automation1/_rbin?asset_type=Account&limit=25&offset=0&sort=metadata.d_time:-1&search=")
                             .basicAuth("rozer@snaplogic.com", "CanarySnap16048.")
                             .check(status().is(200))
-            );
+    );
 
     ChainBuilder tasks =
             exec(
@@ -29,7 +29,7 @@ public class ComputerDatabaseSimulation extends Simulation {
                             .get("/api/1/rest/asset/list/Automation1/_rbin?asset_type=Job&limit=25&offset=0&sort=metadata.d_time:-1&search=")
                             .basicAuth("rozer@snaplogic.com", "CanarySnap16048.")
                             .check(status().is(200))
-            );
+    );
 
     ChainBuilder projectFolder =
             exec(
@@ -37,7 +37,7 @@ public class ComputerDatabaseSimulation extends Simulation {
                             .get("/api/1/rest/asset/list/Automation1/_rbin?asset_type=Dir&limit=25&offset=0&sort=metadata.d_time:-1&search=")
                             .basicAuth("rozer@snaplogic.com", "CanarySnap16048.")
                             .check(status().is(200))
-            );
+    );
 
     ChainBuilder patternCatalogRead =
             exec(
@@ -45,7 +45,7 @@ public class ComputerDatabaseSimulation extends Simulation {
                             .get("/api/2/5963cdb3242e3f0a03a86478/rest/pattern/628fbffe04a5702991f2bf0e")
                             .basicAuth("rozer@snaplogic.com", "Stage16048.")
                             .check(status().is(200))
-            );
+    );
 
     ChainBuilder patternCatalogSearch =
             exec(
@@ -54,7 +54,7 @@ public class ComputerDatabaseSimulation extends Simulation {
                             .formParam("text","")
                             .basicAuth("rozer@snaplogic.com", "Stage16048.")
                             .check(status().is(200))
-            );
+    );
 
     ChainBuilder ccMetrics =
             exec(
@@ -62,7 +62,23 @@ public class ComputerDatabaseSimulation extends Simulation {
                             .post("/api/1/rest/slserver/fetch_snaplex_cc_metrics?subscriber_id=automation&start_ts=1666027346512&end_ts=1666028246512")
                             .basicAuth("rozer@snaplogic.com", "Stage16048.")
                             .check(status().is(200))
-            );
+    );
+
+    ChainBuilder triggeredTask =
+            exec(
+                    http("Triggered Task")
+                            .post("/api/1/rest/slsched/job?duplicate_check=true")
+                            .basicAuth("rozer@snaplogic.com", "Stage16048.")
+                            .check(status().is(200))
+    );
+
+    ChainBuilder userLogin =
+            exec(
+                    http("Triggered Task")
+                            .post("/api/1/rest/asset/session?caller=rozer%40snaplogic.com")
+                            .basicAuth("rozer@snaplogic.com", "CanarySnap16048.")
+                            .check(status().is(200))
+    );
 
 
     HttpProtocolBuilder httpProtocol =
@@ -78,7 +94,7 @@ public class ComputerDatabaseSimulation extends Simulation {
 
     {
         setUp(
-            users.injectOpen(rampUsers(10).during(2))
+            users.injectOpen(rampUsers(100000).during(2))  // number of
         ).protocols(httpProtocol);
     }
 }
