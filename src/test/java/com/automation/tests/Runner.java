@@ -1,43 +1,13 @@
-package computerdatabase;
+package com.automation.tests;
 
 import static io.gatling.javaapi.core.CoreDsl.*;
 import static io.gatling.javaapi.http.HttpDsl.*;
+
+import com.automation.tests.scenarios.ListOfDeleted;
 import io.gatling.javaapi.core.*;
 import io.gatling.javaapi.http.*;
 
-public class ComputerDatabaseSimulation extends Simulation {
-
-    ChainBuilder pipeline =
-            exec(
-                http("List of Deleted Accounts")
-                    .get("/api/1/rest/asset/list/Automation1/_rbin?asset_type=Pipeline&limit=25&offset=0&sort=metadata.d_time:-1&search=")
-                        .basicAuth("rozer@snaplogic.com", "CanarySnap16048.")
-                        .check(status().is(200))
-    );
-
-    ChainBuilder account =
-            exec(
-                    http("List of Deleted Accounts")
-                            .get("/api/1/rest/asset/list/Automation1/_rbin?asset_type=Account&limit=25&offset=0&sort=metadata.d_time:-1&search=")
-                            .basicAuth("rozer@snaplogic.com", "CanarySnap16048.")
-                            .check(status().is(200))
-    );
-
-    ChainBuilder tasks =
-            exec(
-                    http("List of Deleted Accounts")
-                            .get("/api/1/rest/asset/list/Automation1/_rbin?asset_type=Job&limit=25&offset=0&sort=metadata.d_time:-1&search=")
-                            .basicAuth("rozer@snaplogic.com", "CanarySnap16048.")
-                            .check(status().is(200))
-    );
-
-    ChainBuilder projectFolder =
-            exec(
-                    http("List of Deleted Accounts")
-                            .get("/api/1/rest/asset/list/Automation1/_rbin?asset_type=Dir&limit=25&offset=0&sort=metadata.d_time:-1&search=")
-                            .basicAuth("rozer@snaplogic.com", "CanarySnap16048.")
-                            .check(status().is(200))
-    );
+public class Runner extends Simulation {
 
     ChainBuilder patternCatalogRead =
             exec(
@@ -90,11 +60,11 @@ public class ComputerDatabaseSimulation extends Simulation {
                 "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8; rv:16.0) Gecko/20100101 Firefox/16.0"
             );
 
-    ScenarioBuilder users = scenario("Users").exec(ccMetrics);
+    ScenarioBuilder users = scenario("Users").exec(ListOfDeleted.pipeline());
 
     {
         setUp(
-            users.injectOpen(rampUsers(100000).during(2))  // number of
+            users.injectOpen(rampUsers(100).during(2))  // number of
         ).protocols(httpProtocol);
     }
 }
