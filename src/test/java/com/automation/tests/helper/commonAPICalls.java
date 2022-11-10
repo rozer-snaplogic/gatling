@@ -1,13 +1,10 @@
 package com.automation.tests.helper;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import io.gatling.javaapi.core.ChainBuilder;
-import org.json.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
@@ -16,7 +13,7 @@ import static io.gatling.javaapi.core.CoreDsl.exec;
 import static io.gatling.javaapi.http.HttpDsl.http;
 import static io.gatling.javaapi.http.HttpDsl.status;
 
-public class CommonAPICalls {
+public class commonAPICalls {
 
     public ChainBuilder getRequest(String name, String endpoint, Integer status){
         return exec(

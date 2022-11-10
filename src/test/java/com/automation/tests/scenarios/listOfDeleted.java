@@ -5,7 +5,7 @@ import static io.gatling.javaapi.core.CoreDsl.exec;
 import static io.gatling.javaapi.http.HttpDsl.http;
 import static io.gatling.javaapi.http.HttpDsl.status;
 
-public class ListOfDeleted {
+public class listOfDeleted {
 
     public static ChainBuilder pipeline(){
         ChainBuilder pipeline =

@@ -3,7 +3,7 @@ package com.automation.tests;
 import static io.gatling.javaapi.core.CoreDsl.*;
 import static io.gatling.javaapi.http.HttpDsl.*;
 
-import com.automation.tests.scenarios.ListOfDeleted;
+import com.automation.tests.scenarios.listOfDeleted;
 import io.gatling.javaapi.core.*;
 import io.gatling.javaapi.http.*;
 
@@ -60,7 +60,7 @@ public class Runner extends Simulation {
                 "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8; rv:16.0) Gecko/20100101 Firefox/16.0"
             );
 
-    ScenarioBuilder users = scenario("Users").exec(ListOfDeleted.pipeline());
+    ScenarioBuilder users = scenario("Users").exec(listOfDeleted.pipeline());
 
     {
         setUp(
