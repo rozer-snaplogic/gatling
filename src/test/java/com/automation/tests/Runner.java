@@ -3,7 +3,7 @@ package com.automation.tests;
 import static io.gatling.javaapi.core.CoreDsl.*;
 import static io.gatling.javaapi.http.HttpDsl.*;
 
-import com.automation.tests.scenarios.listOfDeleted;
+import com.redis.RedisClient;
 import io.gatling.javaapi.core.*;
 import io.gatling.javaapi.http.*;
 
@@ -22,7 +22,7 @@ public class Runner extends Simulation {
                     http("Search pattern API")
                             .post("/api/2/5806521b242e3f794b90c16c/rest/pattern/search")
                             .formParam("text","")
-                            .basicAuth("rozer@snaplogic.com", "Stage16048.")
+                            .basicAuth("rozer@snaplogic.com", "SnapStage16048.")
                             .check(status().is(200))
     );
 
@@ -38,7 +38,7 @@ public class Runner extends Simulation {
             exec(
                     http("Triggered Task")
                             .post("/api/1/rest/slsched/job?duplicate_check=true")
-                            .basicAuth("rozer@snaplogic.com", "Stage16048.")
+                            .basicAuth("rozer@snaplogic.com", "StageEnv16048.")
                             .check(status().is(200))
     );
 
@@ -60,7 +60,8 @@ public class Runner extends Simulation {
                 "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8; rv:16.0) Gecko/20100101 Firefox/16.0"
             );
 
-    ScenarioBuilder users = scenario("Users").exec(listOfDeleted.pipeline());
+
+    ScenarioBuilder users = scenario("patternCatalogSearch").exec(patternCatalogSearch);
 
     {
         setUp(
