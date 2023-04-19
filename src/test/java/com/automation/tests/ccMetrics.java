@@ -7,7 +7,6 @@ import io.gatling.javaapi.core.*;
 
 public class ccMetrics extends Simulation {
 
-
     ChainBuilder ccMetrics =
             exec(
                     http("Snaplex ccMetrics API")
@@ -15,7 +14,6 @@ public class ccMetrics extends Simulation {
                             .basicAuth("rozer@snaplogic.com", "StageEnvironment16048.")
                             .check(status().is(200))
             );
-
 
     ScenarioBuilder metrics = scenario("patternCatalogSearch").exec(ccMetrics);
 
