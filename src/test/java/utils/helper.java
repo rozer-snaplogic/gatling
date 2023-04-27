@@ -18,7 +18,7 @@ public class helper {
     }
 
     public static HttpProtocolBuilder httpProtocol =
-            http.baseUrl("https://cdn.stage.elastic.snaplogicdev.com")
+            http.baseUrl("https://cdn.canary.elastic.snaplogicdev.com")
                     .acceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8")
                     .acceptLanguageHeader("en-US,en;q=0.5")
                     .acceptEncodingHeader("gzip, deflate")

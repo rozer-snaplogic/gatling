@@ -4,6 +4,6 @@
 mvn gatling:test  -Dgatling.simulationClass=<classpath>
 
 ex.
-mvn mvn gatling:test  -Dgatling.simulationClass=com.automation.tests.enableTask
+mvn gatling:test  -Dgatling.simulationClass=com.automation.tests.enableTask
 
 ```
